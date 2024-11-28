@@ -1,0 +1,15 @@
+version: '2'   # or a supported version
+
+services:
+  booktalk_mysql:
+    image: mysql:8.4
+    container_name: booktalk_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: booktalk_db
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./scripts/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
+      - ./scripts/seed-data.sql:/docker-entrypoint-initdb.d/seed-data.sql

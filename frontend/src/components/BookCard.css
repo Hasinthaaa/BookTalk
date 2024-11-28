@@ -1,0 +1,24 @@
+.book-card {
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     overflow: hidden;
+     text-align: center;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   }
+   
+   .book-card img {
+     width: 100%;
+     height: 300px;
+     object-fit: cover;
+   }
+   
+   .details-button {
+     display: inline-block;
+     margin-top: 10px;
+     padding: 10px 15px;
+     background-color: #6200ea;
+     color: white;
+     border-radius: 4px;
+     text-decoration: none;
+   }
+   

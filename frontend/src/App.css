@@ -1,0 +1,18 @@
+/* src/App.css */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.mantine-Tabs-tab {
+  font-weight: bold;
+}
+
+.mantine-Tabs-panel {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}

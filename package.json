@@ -1,0 +1,12 @@
+{
+  "name": "booktalk",
+  "version": "1.0.0",
+  "description": "a \"Book Review\" application that allows users to browse, add, edit, and  delete book reviews.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
