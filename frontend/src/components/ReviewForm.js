@@ -1,49 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { getReviews, addReview, updateReview } from "./../services/api"; // Import necessary API functions
+import Swal from "sweetalert2";
+import ReviewForm from "./ReviewForm"; // Import ReviewForm component
 
-const ReviewForm = ({ reviewToEdit, onSuccess }) => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [rating, setRating] = useState(1);
-  const [reviewText, setReviewText] = useState('');
+const Reviews = ({ bookId }) => {
+  const [reviews, setReviews] = useState([]); // State to hold fetched reviews
+  const [loading, setLoading] = useState(true); // Loading state
 
-  // When reviewToEdit changes, update the form fields
   useEffect(() => {
-    if (reviewToEdit) {
-      setTitle(reviewToEdit.title);
-      setAuthor(reviewToEdit.author);
-      setRating(reviewToEdit.rating);
-      setReviewText(reviewToEdit.review_text);
-    }
-  }, [reviewToEdit]);
+    setLoading(true); // Set loading to true before fetching
+    console.log(bookId); // Log bookId to confirm it's being passed
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    // Fetch reviews for a specific book using the `getReviews` function
+    getReviews(bookId)
+      .then((response) => {
+        setReviews(response.data); // Set reviews data to state
+        setLoading(false); // Set loading to false when data is fetched
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+        setLoading(false); // Set loading to false in case of error
+      });
+  }, [bookId]); // Run whenever `bookId` changes
 
-    const reviewData = { title, author, rating, review_text: reviewText };
-
-    if (reviewToEdit) {
-      // Update the review
-      axios.put(`/api/reviews/${reviewToEdit.id}`, reviewData)
-        .then(() => onSuccess())
-        .catch(err => console.error('Error updating review:', err));
-    } else {
-      // Add a new review
-      axios.post('/api/reviews', reviewData)
-        .then(() => onSuccess())
-        .catch(err => console.error('Error adding review:', err));
+  // Function to handle adding or updating reviews
+  const handleAddOrUpdateReview = async (reviewToEdit, reviewData) => {
+    try {
+      if (reviewToEdit) {
+        // If there's a review to edit, update it
+        await updateReview(reviewToEdit.id, reviewData);
+        Swal.fire("Success", "Review updated successfully!", "success");
+      } else {
+        console.log("reviewData", reviewData);
+        // Otherwise, create a new review
+        await addReview(reviewData);
+        Swal.fire("Success", "Review added successfully!", "success");
+      }
+      // After adding or updating, refresh the reviews
+      getReviews(bookId)
+        .then((response) => setReviews(response.data))
+        .catch((error) =>
+          console.error("Error fetching updated reviews:", error)
+        );
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        "An error occurred while submitting the review",
+        "error"
+      );
+      console.error(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Book Title" required />
-      <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" required />
-      <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} min="1" max="5" required />
-      <textarea value={reviewText} onChange={(e) => setReviewText(e.target.value)} placeholder="Review" required />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <h2>Reviews for Book ID: {bookId}</h2>
+
+      {loading ? (
+        <p>Loading reviews...</p> // Display loading message
+      ) : (
+        <div>
+          {reviews.length > 0 ? (
+            <ul>
+              {reviews.map((review) => (
+                <li key={review.id}>
+                  <h3>{review.title}</h3>
+                  <p>{review.author}</p>
+                  <p>Rating: {review.rating}</p>
+                  <p>{review.review_text}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No reviews available for this book.</p>
+          )}
+        </div>
+      )}
+
+      {/* ReviewForm for adding or editing a review */}
+      <ReviewForm
+        reviewToEdit={null} // Pass reviewToEdit as null for adding a new review
+        onSuccess={(reviewToEdit, reviewData) =>
+          handleAddOrUpdateReview(reviewToEdit, reviewData)
+        }
+      />
+    </div>
   );
 };
 
-export default ReviewForm;
+export default Reviews;

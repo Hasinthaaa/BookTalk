@@ -1,77 +1,76 @@
 /* src/pages/HomePage.css */
 .homepage-container {
-     margin-top: 40px;
-     text-align: center;
-   }
-   
-   .title {
-     color: #1976d2;
-     margin-bottom: 20px;
-     font-weight: bold;
-   }
-   
-   .book-card {
-     transition: transform 0.3s ease, box-shadow 0.3s ease;
-     border-radius: 12px;
-   }
-   
-   .book-card:hover {
-     transform: translateY(-10px);
-     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-   }
-   
-   .book-image {
-     object-fit: cover;
-   }
-   
-   /* Homepage Title Styling */
+  margin-top: 40px;
+  text-align: center;
+}
+
 .title {
-     font-family: 'Roboto', sans-serif;
-     font-weight: 700;
-     text-align: center;
-     background: linear-gradient(90deg, #100f0f, #131211); /* Gradient effect */
-     color: transparent;
-     -webkit-background-clip: text;
-     background-clip: text;
-     font-size: 3rem;
-     letter-spacing: 2px;
-     margin-bottom: 30px;
-     position: relative;
-     animation: fadeInUp 1s ease-out forwards; /* Add animation */
-   }
-   
-   /* Animation for title */
-   @keyframes fadeInUp {
-     0% {
-       opacity: 0;
-       transform: translateY(20px);
-     }
-     100% {
-       opacity: 1;
-       transform: translateY(0);
-     }
-   }
-   
-   /* Hover effect for extra interaction */
-   .title:hover {
-     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect on hover */
-     transform: scale(1.05); /* Slight scaling effect */
-     transition: transform 0.3s, text-shadow 0.3s ease-in-out;
-   }
-   
-   /* Styling for book card images */
-   .book-image {
-     object-fit: cover;
-     border-radius: 8px;
-   }
-   
-   /* Card Styles */
-   .book-card {
-     transition: transform 0.3s ease, box-shadow 0.3s ease;
-   }
-   
-   .book-card:hover {
-     transform: scale(1.05);
-     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-   }
-   
+  color: #1976d2;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.book-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.book-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.book-image {
+  object-fit: cover;
+}
+
+/* Homepage Title Styling */
+.title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(90deg, #100f0f, #131211); /* Gradient effect */
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  position: relative;
+  animation: fadeInUp 1s ease-out forwards; /* Add animation */
+}
+
+/* Animation for title */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for extra interaction */
+.title:hover {
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect on hover */
+  transform: scale(1.05); /* Slight scaling effect */
+  transition: transform 0.3s, text-shadow 0.3s ease-in-out;
+}
+
+/* Styling for book card images */
+.book-image {
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Card Styles */
+.book-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
